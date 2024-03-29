@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>UNIVERS.IO</title>
+    <link rel="stylesheet" href="./public/assets/css/styles.css" />
+    <style>
+
+    #game-container {
+            width: 1280px; /* Largura inicial do jogo */
+            height: 720px; /* Altura inicial do jogo */
+            border: 1px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <section id="game-container"></section>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.js"></script>
+    
+    <script type="module" src="./src/io/univers/main.js"></script>
+  </body>
+</html>
