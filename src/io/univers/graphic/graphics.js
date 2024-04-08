@@ -26,24 +26,24 @@ export class Graphics{
         // Define os limites de zoom e o fator de ajuste fino
         const minZoom = 1; // Zoom máximo (mais afastado, mostra mais do mapa)
         const maxZoom = 7.0; // Zoom mínimo (mais próximo, mostra menos do mapa)
-        const zoomAdjustmentFactor = 0.5; // Fator de ajuste para adicionar uma margem
+        const zoomAdjustmentFactor = 0.8; // Fator de ajuste para adicionar uma margem
 
         // Determina o nível de zoom necessário para que todos os objetos caibam na tela
         const zoomX = this.game.cameras.main.width / width;
         const zoomY = this.game.cameras.main.height / height;
         let zoomLevel = Math.min(zoomX, zoomY) * zoomAdjustmentFactor;
+        //let zoomLevel = Math.min(zoomX, zoomY);
+
 
         // Aplica os limites de zoom
-        zoomLevel = Phaser.Math.Clamp(zoomLevel, minZoom, maxZoom);
+        // zoomLevel = Phaser.Math.Clamp(zoomLevel, minZoom, maxZoom);
 
         // Aplica o zoom e centraliza a câmera nos objetos
         if(zoomLevel){
-            console.log('Zoom level 1');
-            this.game.cameras.main.setZoom(zoomLevel);
-            //this.game.cameras.main.setZoom(0.8);
+            //this.game.cameras.main.setZoom(zoomLevel);
+            this.game.cameras.main.setZoom(0.2);
             this.game.cameras.main.centerOn(centerX, centerY);
         }else{
-            console.log('Zoom level 2',zoomLevel);
             this.game.cameras.main.setZoom(1);
         }
     }

@@ -8,10 +8,14 @@ export class Player{
         this.group = group;
         this.objects = [];
         this.uid = '';
+        this.skin = 'earth';
+        this.activeroom;
     }
 
     addObject(uid,x,y,mass){
-        let obj = new PlayerObject(this.game,uid,x,y,mass);
+        console.log('Skin no player', this.skin);
+        console.log('UID no player', uid);
+        let obj = new PlayerObject(this.game,uid,x,y,mass,this.skin);
         this.objects.push(obj);
         return obj;
     }
@@ -19,9 +23,9 @@ export class Player{
     shoot(x,y){
     }
 
-    move(point){
+    move(point,local){
         for(const obj of this.objects){
-            obj.move(point);
+            obj.move(point,local);
         }
     }
     break(point){
