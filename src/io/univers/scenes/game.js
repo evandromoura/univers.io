@@ -35,11 +35,11 @@ export class Game extends Phaser.Scene{
         this.input.on('pointermove', (pointer) =>{
             this.pointer = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
             if(this.player){
-                this.player.move(this.pointer,true);
+                this.player.move(this,this.pointer,true);
             }
         });
     }
-    //61982299966
+    //
     update(){
         if(this.player){
             this.player.update(this);
@@ -54,11 +54,11 @@ export class Game extends Phaser.Scene{
     
     createMyPlayer(player){
         console.log('Create my player',player);
-        this.player = new Player(this,'group');
+        this.player = new Player('group');
         this.player.activeroom = player.activeroom;
         this.player.id = player.id;
         for(const obj of player.objects){
-            this.player.addObject(obj.uid,obj.x,obj.y,obj.mass);
+            this.player.addObject(this,obj.uid,obj.x,obj.y,obj.mass);
         }
     }
     createNewPlayer(player){
@@ -66,7 +66,7 @@ export class Game extends Phaser.Scene{
         newplayer.id = player.id;
         newplayer.uid = player.uid;
         for(const obj of player.objects){
-            newplayer.addObject(obj.uid,obj.x,obj.y,obj.mass);
+            newplayer.addObject(this,obj.uid,obj.x,obj.y,obj.mass);
         }
         this.players.push(newplayer);
     }
@@ -77,7 +77,7 @@ export class Game extends Phaser.Scene{
             if(objectsMove){
                 let objectMove = objectsMove.find(obj => obj.uid === uid);
                 if(objectMove){
-                    objectMove.move(pointer,false);
+                    objectMove.move(this,pointer,false);
                 }
             }
         }
@@ -87,7 +87,8 @@ export class Game extends Phaser.Scene{
         let time = new Date().getTime();
         
         if (time - this.lastUpdateTime > this.updateRate) {
-            console.log('Entrou')
+            console.log('Entrou',this.socket);
+
             this.socket.updateObjectsToServer(this.player.activeroom, this.player);
             this.lastUpdateTime = time;
         }else{

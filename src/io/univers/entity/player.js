@@ -2,9 +2,8 @@ import {PlayerObject} from '/src/io/univers/entity/playerobject.js';
 
 export class Player{
 
-    constructor(game,group){
+    constructor(group){
         this.id;
-        this.game = game;
         this.group = group;
         this.objects = [];
         this.uid = '';
@@ -12,10 +11,10 @@ export class Player{
         this.activeroom;
     }
 
-    addObject(uid,x,y,mass){
+    addObject(game,uid,x,y,mass){
         console.log('Skin no player', this.skin);
         console.log('UID no player', uid);
-        let obj = new PlayerObject(this.game,uid,x,y,mass,this.skin);
+        let obj = new PlayerObject(game,uid,x,y,mass,this.skin);
         this.objects.push(obj);
         return obj;
     }
@@ -23,9 +22,9 @@ export class Player{
     shoot(x,y){
     }
 
-    move(point,local){
+    move(game,point,local){
         for(const obj of this.objects){
-            obj.move(point,local);
+            obj.move(game,point,local);
         }
     }
     break(point){

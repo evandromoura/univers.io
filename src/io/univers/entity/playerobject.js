@@ -1,30 +1,30 @@
 export class PlayerObject{
 
     constructor(game,uid,x,y,mass,skin){
-        this.game = game;
+        //this.game = game;
         this.uid = uid;
         this.x = x;
         this.y = y;
         this.mass = mass;
         this.cooldown = 100;
         this.skin = skin;
-        this.sprite = this.createSprite();
+        this.sprite = this.createSprite(game);
     }
 
-    createSprite(){
+    createSprite(game){
         console.log(this.skin);
-        let sprite = this.game.physics.add.sprite(this.x, this.y, this.skin).setScale(this.mass / 1171);
+        let sprite = game.physics.add.sprite(this.x, this.y, this.skin).setScale(this.mass / 1171);
         sprite.setCircle(sprite.width / 2);
         sprite.setCollideWorldBounds(true);
         sprite.setBounce(0);
         return sprite;
     }
 
-    move(pointer,local){
+    move(game,pointer,local){
         let velocity = 8000 / this.mass ;
         velocity = Math.max(40,velocity);
         velocity = Math.min(100,velocity);
-        this.game.physics.moveToObject(this.sprite,pointer, 700);
+        game.physics.moveToObject(this.sprite,pointer, 700);
         if(local){
             // this.game.socket.moveObject(this.game.player.activeroom,this.game.player.id, this.uid,pointer);
         }

@@ -71,6 +71,9 @@ export class Socket{
     }
 
     updateObjectsToServer(room,player){
+        console.log('Entrou aqui no socket: ',this.socket,room,player);
         //this.socket.emit('updatePosition',room,player);
+        let param = {room:room,player:player};
+        this.socket.emit('updatePosition',room);
     }
 }        
