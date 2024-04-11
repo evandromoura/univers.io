@@ -31,7 +31,6 @@ export class Game extends Phaser.Scene{
         this.socket.connect();
         this.socket.join('MILKWAY');
 
-
         this.input.on('pointermove', (pointer) =>{
             this.pointer = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
             if(this.player){
@@ -85,24 +84,26 @@ export class Game extends Phaser.Scene{
 
     updateObjectsToServer(){
         let time = new Date().getTime();
-        
         if (time - this.lastUpdateTime > this.updateRate) {
-            console.log('Entrou',this.socket);
-
+            this.player.objects.forEach(obj=>{
+                obj.x = obj.sprite.body.x;
+                obj.y = obj.sprite.body.y;
+            })
             this.socket.updateObjectsToServer(this.player.activeroom, this.player);
             this.lastUpdateTime = time;
-        }else{
-            console.log('NAOOOO Entrou')
         }
     }
 
     updatePosition(player){
         let playerr = this.players.find(playr => playr.id === player.id);
+        // console.log('Entrou no updatePositionPlayer no game',playerr);
+        
         if(playerr && player){
             if(player.objects){
                 for(let obj of playerr.objects){
                     let objP = player.objects.find(objPP => objPP.uid === obj.uid);
                     if(objP){
+                        console.log('Encontrou o objeto',obj.x,obj.y);
                         obj.sprite.body.x = obj.x;
                         obj.sprite.body.y = obj.y;
                     }
