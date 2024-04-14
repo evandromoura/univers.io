@@ -13,7 +13,7 @@ export class Game extends Phaser.Scene{
         this.graphics;
         this.socket;
         this.lastUpdateTime = 0;
-        this.updateRate = 1000;
+        this.updateRate = 5;
     }
     preload(){
         this.load.image('earth','/public/assets/img/obj/earth.png');
@@ -86,10 +86,10 @@ export class Game extends Phaser.Scene{
         let time = new Date().getTime();
         if (time - this.lastUpdateTime > this.updateRate) {
             this.player.objects.forEach(obj=>{
-                obj.x = obj.sprite.body.x;
-                obj.y = obj.sprite.body.y;
+                obj.x = obj.sprite.x;
+                obj.y = obj.sprite.y;
             })
-            this.socket.updateObjectsToServer(this.player.activeroom, this.player);
+           // this.socket.updateObjectsToServer(this.player.activeroom, this.player);
             this.lastUpdateTime = time;
         }
     }
@@ -103,9 +103,9 @@ export class Game extends Phaser.Scene{
                 for(let obj of playerr.objects){
                     let objP = player.objects.find(objPP => objPP.uid === obj.uid);
                     if(objP){
-                        console.log('Encontrou o objeto',obj.x,obj.y);
-                        obj.sprite.body.x = obj.x;
-                        obj.sprite.body.y = obj.y;
+                        console.log('Encontrou o objeto',objP.x,objP.y);
+                        obj.sprite.x = objP.x;
+                        obj.sprite.y = objP.y;
                     }
                 }
             }

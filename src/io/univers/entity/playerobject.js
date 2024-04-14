@@ -21,10 +21,11 @@ export class PlayerObject{
     }
 
     move(game,pointer,local){
-        let velocity = 8000 / this.mass ;
-        velocity = Math.max(40,velocity);
-        velocity = Math.min(100,velocity);
-        game.physics.moveToObject(this.sprite,pointer, 700);
+        let velocity = 80000 / this.mass ;
+        // velocity = Math.max(40,velocity);
+        velocity = Math.min(400,velocity);
+        console.log(velocity);
+        game.physics.moveToObject(this.sprite,pointer, velocity);
         if(local){
             // this.game.socket.moveObject(this.game.player.activeroom,this.game.player.id, this.uid,pointer);
         }

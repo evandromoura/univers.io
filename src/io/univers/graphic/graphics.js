@@ -46,6 +46,8 @@ export class Graphics{
         }else{
             this.game.cameras.main.setZoom(1);
         }
+        this.game.cameras.main.setZoom(0.2);
+
     }
 
 }    
